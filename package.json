@@ -1,0 +1,36 @@
+{
+  "name": "xevex",
+  "version": "0.1.0",
+  "description": "headless convex applications using zustand",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "prepare": "git config core.hooksPath ./hooks",
+    "preversion": "npm test",
+    "version": "npm run build && npm publish",
+    "postversion": "git push && git push --tags --no-verify",
+    "build:esm": "esbuild lib/index.js --bundle --format=esm --sourcemap --outfile=dist/esm/index.js && cp misc/package.esm.json dist/esm/package.json",
+    "build:cjs": "esbuild lib/index.js --platform=node --bundle --format=cjs --sourcemap --outfile=dist/cjs/index.js",
+    "build": "npm run build:esm && npm run build:cjs",
+    "test": "npm run build && mocha test --require source-map-support/register --exit",
+    "test:watch": "nodemon --watch lib --watch test --exec 'npm run test'"
+  },
+  "author": "Brock Whitten <brock@sintaxi.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.27.2",
+    "mocha": "^11.7.5",
+    "nodemon": "^3.1.11",
+    "should": "^13.2.3",
+    "source-map-support": "^0.5.21"
+  },
+  "dependencies": {
+    "convex": "^1.31.2"
+  }
+}

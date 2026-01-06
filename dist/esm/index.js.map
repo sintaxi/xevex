@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../lib/index.js"],
+  "sourcesContent": ["\nconst Xevex = function(){\n  \n}\n\n/**\n *\n * Exports\n *\n *\n */\n\nexport default Xevex;"],
+  "mappings": ";AACA,IAAM,QAAQ,WAAU;AAExB;AASA,IAAO,gBAAQ;",
+  "names": []
+}
