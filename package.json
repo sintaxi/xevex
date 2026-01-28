@@ -1,6 +1,6 @@
 {
   "name": "xevex",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "headless convex applications using zustand",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
