@@ -9386,8 +9386,9 @@ function create2(initializer) {
     const convexState = convexSlice(set, get);
     const userState = typeof initializer === "function" ? initializer(set, get) : initializer || {};
     return {
-      ...convexState,
-      ...userState
+      ...userState,
+      ...convexState
+      // Convex methods take precedence to prevent user override
     };
   });
   useStore2.connect = function(convexUrl) {
