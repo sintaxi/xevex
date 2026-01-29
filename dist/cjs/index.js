@@ -58,14 +58,15 @@ function createBaseConvexSlice() {
           throw new Error("Not connected. Call connect(convexUrl) first");
         }
         const key = `${name}:${JSON.stringify(args || {})}`;
+        const state = get();
         for (const [queryToken2, sub] of subscriptions) {
           if (sub.key === key) {
-            return (state) => state.queries[queryToken2] || placeholder;
+            return state.queries[queryToken2] || placeholder;
           }
         }
         const { queryToken, unsubscribe } = client.subscribe(name, args);
         subscriptions.set(queryToken, { name, args, key, unsubscribe });
-        return (state) => state.queries[queryToken] || placeholder;
+        return state.queries[queryToken] || placeholder;
       },
       async mutation(name, args = {}) {
         if (!client) {

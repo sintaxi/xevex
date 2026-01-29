@@ -89,7 +89,7 @@ Subscribes to a Convex query with real-time updates.
 - `args` - Query arguments object (optional, defaults to `{}`)
 - `placeholder` - Value returned while loading (optional, defaults to `null`)
 
-**Returns:** Selector function for use with the store hook
+**Returns:** The query result data, or placeholder if not yet loaded
 
 ```javascript
 // In a component
