@@ -11,6 +11,7 @@ Xevex combines the power of [Convex](https://convex.dev) real-time backend with 
 - Real-time query subscriptions
 - Mutations support
 - Works with both ESM and CommonJS
+- **Universal:** Works in browser and Node.js server environments
 - TypeScript-friendly
 
 ## Installation
@@ -192,6 +193,58 @@ function TodoList() {
   )
 }
 ```
+
+## Server-Side Usage
+
+Xevex works identically on Node.js servers with **no modifications needed**. Perfect for:
+- Background workers processing real-time data
+- Server-side caching with automatic updates
+- Microservices needing live data
+- Webhook processors
+
+```javascript
+const { create } = require('xevex')
+
+const useStore = create((set) => ({ processed: 0 }))
+useStore.connect('https://your-app.convex.cloud')
+
+// Subscribe to real-time updates
+useStore.getState().subscribe('tasks:pending', {})
+
+// React to changes
+useStore.subscribe((state) => {
+  const tasks = Object.values(state.queries)[0] || []
+  tasks.forEach(processTask)
+})
+```
+
+**Requirements:**
+- Node.js 16+ (native WebSocket support)
+- Same dependencies as client-side
+
+See [examples/server](./examples/server) for complete working examples and [SERVER-REQUIREMENTS.md](./examples/server/SERVER-REQUIREMENTS.md) for detailed documentation.
+
+## Testing
+
+Xevex includes comprehensive integration tests that verify real-world functionality:
+
+```bash
+# Start Convex backend (terminal 1)
+npm run convex:dev
+
+# Seed database and run tests (terminal 2)
+npm run convex:seed
+npm run test:integration
+```
+
+The tests verify:
+- ✅ Real-time subscriptions
+- ✅ Data synchronization
+- ✅ Mutations
+- ✅ Background workers
+- ✅ Server-side caching
+
+See [TESTING.md](./TESTING.md) for detailed testing documentation.
 
 ## License
 

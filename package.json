@@ -19,7 +19,13 @@
     "build:cjs": "esbuild lib/index.js --platform=node --bundle --format=cjs --sourcemap --outfile=dist/cjs/index.js",
     "build": "npm run build:esm && npm run build:cjs",
     "test": "npm run build && mocha test --require source-map-support/register --exit",
-    "test:watch": "nodemon --watch lib --watch test --exec 'npm run test'"
+    "test:watch": "nodemon --watch lib --watch test --exec 'npm run test'",
+    "convex:dev": "npx convex dev",
+    "convex:seed": "npx convex run seed:seedTestData",
+    "test:integration": "npm run build && node examples/server/basic.js && node examples/server/worker.js && node examples/server/cache.js",
+    "test:integration:basic": "npm run build && node examples/server/basic.js",
+    "test:integration:worker": "npm run build && node examples/server/worker.js",
+    "test:integration:cache": "npm run build && node examples/server/cache.js"
   },
   "author": "Brock Whitten <brock@sintaxi.com>",
   "license": "ISC",
