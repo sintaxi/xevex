@@ -15,8 +15,8 @@
     "preversion": "npm test",
     "version": "npm run build && npm publish",
     "postversion": "git push && git push --tags --no-verify",
-    "build:esm": "esbuild lib/index.js --bundle --format=esm --sourcemap --outfile=dist/esm/index.js && cp misc/package.esm.json dist/esm/package.json",
-    "build:cjs": "esbuild lib/index.js --platform=node --bundle --format=cjs --sourcemap --outfile=dist/cjs/index.js",
+    "build:esm": "esbuild lib/index.js --bundle --format=esm --sourcemap --external:zustand --external:react --external:convex --outfile=dist/esm/index.js && cp misc/package.esm.json dist/esm/package.json",
+    "build:cjs": "esbuild lib/index.js --platform=node --bundle --format=cjs --sourcemap --external:zustand --external:react --external:convex --outfile=dist/cjs/index.js",
     "build": "npm run build:esm && npm run build:cjs",
     "test": "npm run build && mocha test --require source-map-support/register --exit",
     "test:watch": "nodemon --watch lib --watch test --exec 'npm run test'",
@@ -37,7 +37,7 @@
     "source-map-support": "^0.5.21"
   },
   "dependencies": {
-    "convex": "^1.31.2",
+    "convex": "^1.31.6",
     "zustand": "^5.0.2"
   }
 }
