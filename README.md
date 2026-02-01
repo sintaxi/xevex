@@ -87,7 +87,7 @@ Subscribes to a Convex query with real-time updates.
 **Parameters:**
 - `name` - Query name (e.g., 'messages:list')
 - `args` - Query arguments object (optional, defaults to `{}`)
-- `placeholder` - Value returned while loading (optional, defaults to `null`)
+- `placeholder` - Value returned while loading (optional, defaults to `null`). The placeholder is cached per subscription, so you can safely pass fresh arrays/objects (e.g., `[]`) without causing infinite re-renders.
 
 **Returns:** The query result data, or placeholder if not yet loaded
 

@@ -34,12 +34,12 @@ function createBaseConvexSlice() {
         const state = get();
         for (const [queryToken2, sub] of subscriptions) {
           if (sub.key === key) {
-            return state.queries[queryToken2] || placeholder;
+            return state.queries[queryToken2] ?? sub.placeholder;
           }
         }
         const { queryToken, unsubscribe } = client.subscribe(name, args);
-        subscriptions.set(queryToken, { name, args, key, unsubscribe });
-        return state.queries[queryToken] || placeholder;
+        subscriptions.set(queryToken, { name, args, key, placeholder, unsubscribe });
+        return state.queries[queryToken] ?? placeholder;
       },
       async mutation(name, args = {}) {
         if (!client) {
